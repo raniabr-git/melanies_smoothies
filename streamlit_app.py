@@ -3,13 +3,14 @@ import streamlit as st
 from snowflake.snowpark.functions import col 
 
 cnx=st.connection("snowflake")
+session = cnx.session()
 option =st.selectbox('how you want to be contacted',('Email','Phone','Home phone'))
 st.write('you selected :', option)
 
 name_on_order = st.text_input('Name on smooth')
 st.write('name is :', name_on_order)
 
-session = cnx.session()
+
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
 #st.dataframe(data=my_dataframe, use_container_width=True)
 
